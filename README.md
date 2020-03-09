@@ -40,7 +40,7 @@ Check it in action:
 ## Samples
 
 In the Sample folder you have two samples:
-- demo dummy.html - a fake CosmosDB simulator just to demo the client widget in action
+- demo dummy.html - a fake CosmosDB simulator just to demo the client widget in action. You can see it live [here](https://lambot.blob.core.windows.net/github/CosmosDBTraffic/demo%20dummy.html).
 - demo.html - a ready to run sample that queries the local CosmosDB emulator
 
 ## How to use it
