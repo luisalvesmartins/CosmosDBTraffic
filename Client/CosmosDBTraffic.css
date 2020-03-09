@@ -1,0 +1,66 @@
+.CosmosTrafficMenu {
+    font-size:10px;
+    font-family: Arial, Helvetica, sans-serif;
+    display:flex;
+    margin-bottom: 2px;
+}
+.CosmosTrafficMenu>DIV{
+    color:white;
+    margin-right:2px;
+    height:16px;
+    width:16px;
+    display:flex;
+    justify-content: center;
+
+    align-items:center;
+    border-radius: 5px;
+    cursor:pointer;
+}
+.CosmosTrafficGraph {
+    display:flex;
+    align-items:flex-end;
+}
+.CosmosTrafficGraph>DIV {
+    width:9px;
+    margin-right:1px;
+}
+.CosmosTraffic{
+    position:fixed;
+    left:18px;
+    top:120px;
+    background-color: rgb(241, 241, 241);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border:1px solid lightgray;
+    margin:2px;
+    padding:2px;
+    display:none;
+    z-index: 100000;
+}
+.CosmosCallOut{
+    cursor:pointer;
+    position:fixed;
+    left:0;
+    top:122px;
+    writing-mode: tb-rl;
+    background-color:gray;
+    color:white;
+    padding:5px;
+    text-align:center;
+    font-size:8px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    height:63px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    z-index: 100000;
+}
+.CosmosTrafficCol0 {background-color: gray;}
+.CosmosTrafficCol1 {background-color: red;}
+.CosmosTrafficCol2 {background-color: green;}
+.CosmosTrafficCol3 {background-color: blue;}
+.CosmosTrafficCol4 {background-color: purple;}
+.CosmosTrafficSeparator {
+    margin-left:2px;
+    margin-right:2px;
+    width:1px;
+    background-color:gray;
+}

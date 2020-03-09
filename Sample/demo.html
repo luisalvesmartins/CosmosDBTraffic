@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CosmosDBTraffic Sample</title>
+    <script src=jquery-3.4.1.min.js></script>
+    <!-- THE REFERENCES -->
+    <script src="../Client/CosmosDBTraffic.js"></script>
+    <link href="../Client/CosmosDBTraffic.css" rel="stylesheet">
+    <style>
+        body {
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: 12pt;
+            padding-left: 20px;
+        }
+        #divResult{
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            font-size:9pt;
+        }
+    </style>
+</head>
+<body>
+    <h1>CosmosDBTraffic Demo</h1>
+
+    This page is connected to the proxy functions and to the local CosmosDB emulator.<br>
+    It expects a database with the name "ToDoList" to exist with a collection named "Items".
+
+    <br>    
+    <br>&lt;- Check the widget in the left
+    <br>
+    <img src="instructions.JPG" height="200px">
+    <br>
+
+    After having the Azure Function running on the default port(7071), open the widget and click the button:
+
+    <button onclick="demo()">Demo</button><br><br>
+
+    <div id="divResult" ></div>
+
+
+<script>
+window.onload=async function(){
+    CosmosDBTraffic.init();
+
+    CosmosDBTraffic.APIHOST="http://localhost:7071/api/";
+
+    //    1. COUNT ALL RECORDS
+    divResult.innerHTML="<b>1. RETRIEVE ALL RECORDS AND COUNT</b><br>";
+    var query="select * from c";
+    var result=await CosmosDBTraffic.query("ToDoList","Items",query,"1.SELECT");
+    console.log(result)
+    divResult.innerText+="Query: " + query + "\nResult: " + result.length + " records\n\n\n"
+
+    //    2. GET TOP 1
+    divResult.innerHTML+="<b>2. GET TOP 1</b><br>";
+    var query="select top 1 * from c";
+    var result=await CosmosDBTraffic.query("ToDoList","Items",query,"2.SELECT Top 1");
+    if (result.length>0)
+        divResult.innerText+="Query: " + query + "\nResult:" + JSON.stringify( result[0] )+ "\n\n\n"
+    else
+        divResult.innerText+="Query: " + query + "\nNo Records\n\n\n"
+
+    //    3. INSERT RECORD
+    divResult.innerHTML+="<b>3. Insert test item</b><br>";
+    var record='{"text":"I am a test item", "id":"test", "pkey":"test"}';
+    var result=await CosmosDBTraffic.upsert("ToDoList","Items",record,"test", "3. Insert record");
+    divResult.innerText+="Upsert: " + record + "\n\n\n"
+
+    //    4. VERIFY RECORD
+    divResult.innerHTML+="<b>4. Verify test item</b><br>";
+    var query="select * from c where c.id='test'";
+    var result=await CosmosDBTraffic.query("ToDoList","Items",query,"4. Verify demo record");
+    divResult.innerText+="VERIFY: " + query + "\nResult:" + JSON.stringify(result[0]) + "\n\n\n"
+
+    //    5. CHANGE RECORD
+    divResult.innerHTML+="<b>5. Upsert modified test item</b><br>";
+    var record='{"text":"I am a modified test item. Really!", "id":"test", "pkey":"test"}';
+    var result=await CosmosDBTraffic.upsert("ToDoList","Items",record,"test", "5. Change record");
+    divResult.innerText+="Upsert: " + record + "\n\n\n"
+
+    //    6. VERIFY RECORD & GET id
+    divResult.innerHTML+="<b>6. Verify modified test item</b><br>";
+    var query="select * from c where c.id='test'";
+    var result=await CosmosDBTraffic.query("ToDoList","Items",query,"6. Verify change record");
+    divResult.innerText+="VERIFY: " + query + "\nResult:" + JSON.stringify(result[0]) + "\n\n\n"
+
+    //    7. DELETE
+    divResult.innerHTML+="<b>7. Delete test item</b><br>";
+    var result=await CosmosDBTraffic.delete("ToDoList","Items","test","test","7. delete record");
+    divResult.innerText+="Delete: test\nResult:" + JSON.stringify(result) + "\n\n\n"
+
+    //    8. VERIFY THERE IS NONE
+    divResult.innerHTML+="<b>8. Verify test item is delete</b><br>";
+    var query="select * from c where c.id='test'";
+    var result=await CosmosDBTraffic.query("ToDoList","Items",query,"8. Verify delete");
+    divResult.innerText+="VERIFY: " + query + "\nResult:" + JSON.stringify(result.length) + "\n\n\n"
+
+    divResult.innerHTML+="<b>Demo Finished</b>";
+}
+
+</script>
+</body>
+</html>

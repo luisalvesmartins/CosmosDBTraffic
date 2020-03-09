@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CosmosDBTraffic Sample</title>
+    <!-- THE REFERENCES -->
+    <script src="../Client/CosmosDBTraffic.js"></script>
+    <link href="../Client/CosmosDBTraffic.css" rel="stylesheet">
+    <style>
+        body {
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: 12pt;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CosmosDBTraffic Simulation Demo</h1>
+
+    This page is not connected to CosmosDB, it just simulates the widget in action.
+
+    Open the widget on the left see to new random data coming every 3 seconds.
+
+    <img src="instructions.JPG">
+    
+<script>
+var counter=0;
+window.onload=function(){
+    //init
+    CosmosDBTraffic.init();
+
+    window.setInterval(function(){
+        counter++;
+        CosmosDBTraffic.add(
+        [
+            1+Math.random()*10,
+            Math.random()*10,
+            Math.random()*100,
+            Math.random()*1000000,"Query " +counter, 
+            "URL " + counter
+        ]);
+    },3000);
+}
+
+</script>
+</body>
+</html>
