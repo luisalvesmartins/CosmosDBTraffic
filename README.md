@@ -32,13 +32,16 @@ Important notes:
 - this lib should only be used in development and under a secure network environment as it exposes the database to the HTML/Javascript client.
 - There is no security aspect implemented. You can add it but the objective is always to have this in a dev and secure network environment.
 
-### Check it in action
+Check it in action:
+
+![Demo](livedemo.gif)
+
+
+## Samples
 
 In the Sample folder you have two samples:
 - demo dummy.html - a fake CosmosDB simulator just to demo the client widget in action
 - demo.html - a ready to run sample that queries the local CosmosDB emulator
-
-
 
 ## How to use it
 
@@ -140,11 +143,11 @@ Initializes the widget. Called only once.
 The default APIURL is "http://localhost:7071/api/"
 
 Example:
-```
+```javascript
 CosmosDBTraffic.init();
 ```   
 or
-```
+```javascript
 CosmosDBTraffic.init('http://localhost:8080/api/');
 ```
 
@@ -152,7 +155,7 @@ CosmosDBTraffic.init('http://localhost:8080/api/');
 
 Add a traffic record to the traffic list.
 The record has this format:
-```
+```javascript
 [time, RU, NREC, BYTES, comment, URL]
 ```
 
@@ -163,7 +166,7 @@ The record has this format:
 Returns the query result.
 
 Example:
-```
+```javascript
 var query="select * from c where c.id='test'";
 var result=await CosmosDBTraffic.query("ToDoList","Items",query,"Retrieving all records with test");
 ```
@@ -173,7 +176,7 @@ var result=await CosmosDBTraffic.query("ToDoList","Items",query,"Retrieving all 
 Inserts or Updates a item
 
 Example:
-```
+```javascript
 var item='{"text":"I am a test item", "id":"testid", "pkey":"test"}';
 var result=await CosmosDBTraffic.upsert("ToDoList","Items",item,"test", "Insert an item");
 ```
@@ -184,6 +187,6 @@ var result=await CosmosDBTraffic.upsert("ToDoList","Items",item,"test", "Insert 
 Deletes an item
 
 Example:
-```
+```javascript
 var result=await CosmosDBTraffic.delete("ToDoList","Items","testid","test","Delete item");
 ```
