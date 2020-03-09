@@ -145,7 +145,7 @@ CosmosDBTraffic.init();
 ```   
 or
 ```
-CosmosDBTraffic.('http://localhost:8080/api/');
+CosmosDBTraffic.init('http://localhost:8080/api/');
 ```
 
 *Add(record)*

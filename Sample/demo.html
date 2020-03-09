@@ -40,10 +40,8 @@
 
 
 <script>
-window.onload=async function(){
-    CosmosDBTraffic.init();
-
-    CosmosDBTraffic.APIHOST="http://localhost:7071/api/";
+function demo(){
+    CosmosDBTraffic.init("http://localhost:7071/api/");
 
     //    1. COUNT ALL RECORDS
     divResult.innerHTML="<b>1. RETRIEVE ALL RECORDS AND COUNT</b><br>";
