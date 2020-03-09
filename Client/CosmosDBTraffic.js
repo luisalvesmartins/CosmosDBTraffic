@@ -3,7 +3,11 @@ var CosmosDBTraffic={
     graphHeight:50,
     DIVCALLOUT:'_divCosmosCallOut',
     DIVDETAIL:'_divCosmosTraffic',
-    tog:function(){
+    data:[],
+    max:[0,0,0,0],
+    vis:[true,true,true,true],
+    cols:['Time(s)','RUs','Records','Size(bytes)'],
+tog:function(){
         CosmosDBTraffic.div.style.display= (CosmosDBTraffic.div.style.display=="block") ? "none":"block";
         if (CosmosDBTraffic.div.style.display=="block")
             CosmosDBTraffic.drawGraph();
@@ -11,10 +15,6 @@ var CosmosDBTraffic={
     init:function(HostURL){
         if (HostURL!=null)
             CosmosDBTraffic.APIHOST=HostURL;
-        CosmosDBTraffic.data=[];
-        CosmosDBTraffic.max=[0,0,0,0];
-        CosmosDBTraffic.vis=[true,true,true,true];
-        CosmosDBTraffic.cols=['Time(s)','RUs','Records','Size(bytes)'];
     
         if (!document.getElementById(CosmosDBTraffic.DIVCALLOUT))
         {
